@@ -1,9 +1,12 @@
 from aws_cdk import (
-    # Duration,
+    Duration,
     Stack,
-    # aws_sqs as sqs,
+   CfnOutput,
+   aws_sqs as sqs,
+   aws_s3 as s3
 )
 from constructs import Construct
+
 
 class TaskStack(Stack):
 
@@ -12,8 +15,12 @@ class TaskStack(Stack):
 
         # The code that defines your stack goes here
 
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "TaskQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
+        queue = sqs.Queue(
+            self, "StaticappQueue",
+            visibility_timeout=Duration.seconds(300),
+         )
+
+        bucket = s3.Bucket(self,"sitebucket",bucket_name="bukd4323",public_read_access=True,
+        website_index_document="index.html")
+
+       
